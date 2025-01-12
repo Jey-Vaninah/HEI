@@ -1,8 +1,8 @@
-package Entity;
+package entity;
 
 import java.time.LocalDate;
 
-public class Students {
+public class Student {
     private String std;
     private String lastName;
     private String firstName;
