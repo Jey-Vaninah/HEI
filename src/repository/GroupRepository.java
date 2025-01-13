@@ -9,7 +9,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 public class GroupRepository {
     private final Connection connection;
@@ -71,7 +70,7 @@ public class GroupRepository {
          """;
         try{
             PreparedStatement prs = connection.prepareStatement(query);
-            prs.setString (1, UUID.randomUUID().toString());
+            prs.setString (1, toCreate.getId());
             prs.setString (2, toCreate.getName());
             prs.setInt(3, toCreate.getYear());
             prs.setString(4, toCreate.getPromotion().toString());
@@ -83,7 +82,8 @@ public class GroupRepository {
     }
 
     public Group crupdate(Group crupdateGroup){
-        if(crupdateGroup.getId() == null || crupdateGroup.getId().isEmpty()) {
+        final boolean isCreate = this.findById(crupdateGroup.getId()) == null;
+        if(isCreate) {
             return this.create(crupdateGroup);
         }
         return this.udpate(crupdateGroup);
