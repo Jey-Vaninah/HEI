@@ -3,29 +3,18 @@ package entity;
 import java.time.LocalDate;
 
 public class Student {
-    private String std;
-    private String lastName;
-    private String firstName;
-    private LocalDate birthday;
+    private String id;
+    private String name;
+    private String ref;
+    private LocalDate birthdate;
     private Gender gender;
-    private String group;
-    private Level level;
-    private String address;
-    private String email;
+    private Group group;
 
-    public void setStd(String std) {
-        if (std != null && std.startsWith("STD")) {
-            this.std = std;
+    public void setRef(String ref) {
+        if (ref != null && ref.startsWith("STD")) {
+            this.ref = ref;
         } else {
             throw new IllegalArgumentException("The student code must start with 'STD'.");
-        }
-    }
-
-    public void setEmail(String email) {
-        if (email != null && email.startsWith("hei")) {
-            this.email = email;
-        } else {
-            throw new IllegalArgumentException("The email must start with 'hei'.");
         }
     }
 }
