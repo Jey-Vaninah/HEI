@@ -1,18 +1,38 @@
-package repository.conf;
+package repository;
 
 import entity.Group;
 import entity.Promotion;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class GroupRepository {
-    private final Connection connection = DatabaseConnection.getConnection();
+    private final Connection connection;
 
-    public List<Group> getGroups() {
+    public GroupRepository(Connection connection) {
+        this.connection = connection;
+    }
+
+    public Group findById(String id) {
+        String query = "select * from \"group\" where \"id\"=?";
+        try{
+            PreparedStatement prs = connection.prepareStatement(query);
+            prs.setString (1, id);
+            ResultSet rs = prs.executeQuery();
+            if(rs.next()){
+                return resultSetToGroup(rs);
+            }
+            return null;
+        }catch (SQLException error){
+            throw new RuntimeException(error);
+        }
+    }
+
+    public List<Group> findAll() {
         String query = "select * from \"group\"";
         List<Group> groups = new ArrayList<>();
         try{

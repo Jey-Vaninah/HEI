@@ -1,5 +1,7 @@
 package entity;
 
+import java.util.Objects;
+
 public class Group {
     private String id;
     private String name;
@@ -42,7 +44,30 @@ public class Group {
         return promotion;
     }
 
-    public void setPromotion(Promotion promotion) {
+    public void setPjjuromotion(Promotion promotion) {
         this.promotion = promotion;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Group group = (Group) o;
+        return Objects.equals(id, group.id) && Objects.equals(name, group.name) && Objects.equals(year, group.year) && promotion == group.promotion;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, year, promotion);
+    }
+
+    @Override
+    public String toString() {
+        return "Group{" +
+            "id='" + id + '\'' +
+            ", name='" + name + '\'' +
+            ", year=" + year +
+            ", promotion=" + promotion +
+            '}';
     }
 }
