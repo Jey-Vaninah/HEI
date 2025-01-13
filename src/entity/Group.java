@@ -14,7 +14,6 @@ public class Group {
         this.year = year;
         this.promotion = promotion;
     }
-    public Group() {}
 
     public String getId() {
         return id;

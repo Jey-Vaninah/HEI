@@ -6,9 +6,9 @@ import java.sql.SQLException;
 
 public class DatabaseConnection {
     private static Connection connection;
-    private static String DB_USERNAME = System.getenv("DB_USERNAME");
-    private static String DB_PASSWORD = System.getenv("DB_PASSWORD");
-    private static String DB_URL = System.getenv("DB_URL");
+    private static final String DB_USERNAME = System.getenv("DB_USERNAME");
+    private static final String DB_PASSWORD = System.getenv("DB_PASSWORD");
+    private static final String DB_URL = System.getenv("DB_URL");
 
     public static Connection getConnection() {
         if(connection == null) {
@@ -23,5 +23,17 @@ public class DatabaseConnection {
             }
         }
         return connection;
+    }
+
+    public static void closeConnection(){
+        if(connection == null){
+            return;
+        }
+
+      try {
+        connection.close();
+      } catch (SQLException e) {
+        throw new RuntimeException(e);
+      }
     }
 }
