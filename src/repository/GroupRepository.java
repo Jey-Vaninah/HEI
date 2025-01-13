@@ -48,10 +48,10 @@ public class GroupRepository {
 
     public Group resultSetToGroup(ResultSet rs) throws SQLException {
         return new Group(
-            rs.getString("\"id\""),
-            rs.getString("\"name\""),
-            rs.getInt("\"year\""),
-            Promotion.valueOf(rs.getString("\"promotion\""))
+            rs.getString("id"),
+            rs.getString("name"),
+            rs.getInt("year"),
+            Promotion.valueOf(rs.getString("promotion"))
         );
     }
 }
